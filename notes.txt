@@ -1,0 +1,6 @@
+to start app
+    npm start
+open on browser 
+    http://localhost:4200/
+to run cypress
+    npx cypress open
