@@ -114,7 +114,7 @@ describe('First test suite', () => {
         cy.wrap(usingTheGridForm).find('[for="inputPassword2"]').should('contain','Password')
          })
     })
-    it.only('save subject of the command', () => { 
+    it.only('extract text values', () => { 
         cy.visit('/')
         cy.contains('Forms').click()
         cy.contains('Form Layouts').click()
@@ -122,6 +122,31 @@ describe('First test suite', () => {
         //1
         cy.get('[for="exampleInputEmail1"]').should('contain', 'Email address')
 
+        //2 using jquery text method to extract the html text, then you can assign this value to variable const and assert or any other op
+        cy.get('[for="exampleInputEmail1"]').then( label => {
+            const labelText = label.text()
+            expect(labelText).to.equal('Email address')
+            cy.wrap(labelText).should('contain', 'Email address')
+
+        })
+        //3 use cypress method, invoke provide it the text argument, cypress will return you a text value for that element that you are invoking from
+        cy.get('[for="exampleInputEmail1"]').invoke('text').then(text => {
+            expect(text).to.equal('Email address')
+
+        })
+        //3.1
+        cy.get('[for="exampleInputEmail1"]').invoke('text').as('labelText').should('contain', 'Email address')
+
+        //4 invoke to get attribute and name like class
+        cy.get('[for="exampleInputEmail1"]').invoke('attr', 'class').then( classValue => {
+            expect(classValue).to.equal('label')
+        })
+        //5 invoke property using prop key and value to extract value from the input key
+        cy.get('#exampleInputEmail1').type('test@test.com')
+        cy.get('#exampleInputEmail1').invoke('prop','value').should('contain', 'test@test.com').then (property => {
+
+            expect(property).to.equal('test@test.com')
+        })
     })
 
 })
