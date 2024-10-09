@@ -171,7 +171,7 @@ describe("First test suite", () => {
         cy.wrap(radioButtons).eq(2).should("be.disabled");
       });
   });
-  it.only("checkboxes", () => {
+  it("checkboxes", () => {
     cy.visit("/");
     cy.contains("Modal & Overlays").click();
     cy.contains("Toastr").click();
@@ -179,6 +179,26 @@ describe("First test suite", () => {
     //cy.get('[type="checkbox"]').uncheck({force:true});
     cy.get('[type="checkbox"]').eq(0).click({ force: true });
     cy.get('[type="checkbox"]').eq(1).check({ force: true });
+  });
+
+  it.only("Date picker", () => {
+    cy.visit("/");
+    cy.contains("Forms").click();
+    cy.contains("Datepicker").click();
+
+    let date = new Date();
+    date.setDate(date.getDate() + 5);
+    let futureDate = date.getDate();
+    let dateToAssert = `Oct ${futureDate}, 2024`;
+
+    cy.contains("nb-card", "Common Datepicker")
+      .find("input")
+      .then((input) => {
+        cy.wrap(input).click();
+        cy.get(".day-cell").not("bounding-month").contains(futureDate).click();
+        cy.wrap(input).invoke("prop", "value").should("contain", dateToAssert);
+        cy.wrap(input).should("have.value", dateToAssert);
+      });
   });
 });
 
