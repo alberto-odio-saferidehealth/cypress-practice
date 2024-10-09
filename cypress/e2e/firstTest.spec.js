@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-//LESSON 24 SECTION 4
+//SECTION 4 LESSON 25
 
 describe("First test suite", () => {
   // describe('suite section', () => {
