@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-/*SECTION 4 LESSON 27
+/*SECTION 4 LESSON 28
 to run:
 npm start
 npx cypress open*/
