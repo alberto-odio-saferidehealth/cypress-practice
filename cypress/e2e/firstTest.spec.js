@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-/*SECTION 4 LESSON 28
+/*SECTION 4 LESSON 30
 to run:
 npm start
 npx cypress open*/
@@ -244,7 +244,7 @@ describe("First test suite", () => {
       });
     });
   });
-  it.only("Web tables", () => {
+  it("Web tables", () => {
     cy.visit("/");
     cy.contains("Tables & Data").click();
     cy.contains("Smart Table").click();
@@ -276,9 +276,55 @@ describe("First test suite", () => {
         cy.wrap(tableColumns).eq(2).should("contain", "John");
         cy.wrap(tableColumns).eq(3).should("contain", "Smith");
       });
+    //3 Get each row validation
+    const age = [20, 30, 40, 200];
+    cy.wrap(age).each((age) => {
+      cy.get("thead [placeholder='Age']").clear().type(age);
+      cy.wait(500);
+      cy.get("tbody tr").each((tableRow) => {
+        if (age == 200) {
+          cy.wrap(tableRow).should("contain", "No data found");
+        } else {
+          cy.wrap(tableRow).find("td").eq(6).should("contain", age);
+        }
+      });
+    });
   });
-});
 
+  it("tooltips", () => {
+    cy.visit("/");
+    cy.contains("Modal & Overlays").click();
+    cy.contains("Tooltip").click();
+    cy.contains("nb-card", "Colored Tooltips").contains("Default").click();
+  });
+
+  it("dialog box", () => {
+    cy.visit("/");
+    cy.contains("Tables & Data").click();
+    cy.contains("Smart Table").click();
+    //1
+    //cy.get("tbody tr").first().find(".nb-trash").click();
+    //cy.on("window:confirm", (confirm) => {
+    //  expect(confirm).to.equal("Are you sure you want to delete?");
+    //});
+    //2 cleaner
+    //const stub = cy.stub();
+    //cy.on("window:confirm", stub);
+    //cy.get("tbody tr")
+    //  .first()
+    //  .find(".nb-trash")
+    //  .click()
+    //  .then(() => {
+    //    expect(stub.getCall(0)).to.be.calledWith(
+    //      "Are you sure you want to delete?"
+    //    );
+    //3
+    cy.get("tbody tr").first().find(".nb-trash").click();
+    cy.on("window:confirm", () => false);
+  });
+  //more on assertions
+  //https://docs.cypress.io/app/references/assertions
+});
 // describe('Second test suite', () => {
 
 //     it('first test', () => {
