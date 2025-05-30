@@ -200,7 +200,7 @@ describe("First test suite", () => {
             !dateAttribute.includes(futureYear)
           ) {
             cy.get("[data-name='chevron-right']").click();
-            selectDayFromCurrent();
+            selectDayFromCurrent(day);
           } else {
             cy.get(".day-cell")
               .not("bounding-month")

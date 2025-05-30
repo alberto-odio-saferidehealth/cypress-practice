@@ -38,6 +38,6 @@
 //https://docs.cypress.io/api/cypress-api/custom-commands
 //SECTION 5 LESSON 34
 
-Cypress.Commands.add("opneHomePage", () => {
+Cypress.Commands.add("openHomePage", () => {
   cy.visit("/");
 });
