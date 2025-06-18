@@ -1,0 +1,27 @@
+create account
+
+applitools eyes
+
+applitools.com/tutorials/quickstart/web/cypress/integrate
+
+create applitools.config.js -> remove testConcurrency: 5
+
+add apiKey: "", instead
+
+add beforeEach eyesOpen specified in steps
+
+add the method eyesCheckWindow to make the snapshot
+
+add afterEach eyesClose
+
+Applitools dashboard -> Annotations -> Ignore (to ignore an area where we dont want to validate)
+
+Ignore region
+Floating region
+Ignore colors region
+Layout region
+
+
+Root cause analysis -> applitools will show you what was changed -> it gets the source code
+
+iniside applitools.config.js -> whit the browser section configured -> it ran in different browsers and devices

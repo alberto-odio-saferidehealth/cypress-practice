@@ -1,0 +1,16 @@
+//SECIONT 7 LESSON 51
+npx cypress open
+
+Runs tab -> Setup project to record -> login github
+
+add projectId to cypress.json
+
+add to package.json spec run --record --key 127d5468-b317-4d97-a9d5-b1d33d7458db
+
+PARALLEL
+
+"cy:run_browser": "npm run cy:run_spec -- --browser firefox --group Firefox --ci-build-id 1 & npm run cy:run_spec -- --browser chrome --group Chrome --ci-build-id 1"
+
+PARALLEL CI CD JENKINS
+jenkinsfile
+
